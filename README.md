@@ -1,6 +1,7 @@
 # AMEX Default Prediction
 
-Interview-focused Kaggle project for **American Express - Default Prediction**.
+Kaggle project for **American Express - Default Prediction**.
+Google Colab: https://colab.research.google.com/drive/1esDn3W4uVg1T8FkYZyUHhU5YFc-lg3rx?usp=sharing
 
 ## Primary Notebook
 - `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_default_prediction.ipynb`
