@@ -7,10 +7,12 @@ Interview-focused Kaggle project for **American Express - Default Prediction**.
   - `v1`: baseline incremental LightGBM
   - `v2`: advanced production ensemble
   - `v3`: two-stage advanced model (statement meta -> customer model)
+  - `v2+v3+v4` rank blend cell saves `blend_v234_submission.csv`
 - `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_v4_sequence_embeddings.ipynb`
   - upgraded sequence representation learning (bi-GRU denoising autoencoder)
   - delta-sequence features + early stopping + larger embeddings
   - merge embeddings with tabular aggregates and train LightGBM
+  - test inference saves `v4_submission.csv`
 
 ## Data Path (Colab)
 Default root:
