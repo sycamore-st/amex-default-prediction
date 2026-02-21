@@ -1,33 +1,27 @@
 # AMEX Default Prediction
 
-Interview-focused Kaggle project for **American Express - Default Prediction** with a clean single-notebook workflow.
+Interview-focused Kaggle project for **American Express - Default Prediction**.
 
-## Repo Layout
-- `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_default_prediction.ipynb`: single end-to-end notebook
-- `/Users/claire/PycharmProjects/amex-default-prediction/data/raw/amex-default-prediction/`: local raw data (optional for local runs)
-- `/Users/claire/PycharmProjects/amex-default-prediction/requirements.txt`: dependencies
-
-## Modeling Versions
-- `v1`: baseline incremental LightGBM
-- `v2`: advanced production ensemble (this is the former `v3` pipeline)
-- `v3`: additional online-inspired meta-ensemble layer on top of `v2` part predictions
-
-## Run Notes
-- In notebook config cell, choose one: `TRAIN_VERSION = 'v1'` or `'v2'` or `'v3'`.
-- Recommended order for leaderboard push:
-  1. Run `v2` to produce `adv_v2_part_*.csv` and `advanced_submission_v2.csv`
-  2. Run `v3` to produce `advanced_submission_v3.csv`
-- Full-run cache sanity checks are enforced:
-  - min label customers: `400000`
-  - min feature customers: `350000`
-  - min coverage ratio: `0.85`
+## Notebooks
+- `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_default_prediction.ipynb`
+  - `v1`: baseline incremental LightGBM
+  - `v2`: advanced production ensemble
+  - `v3`: two-stage advanced model (statement meta -> customer model)
+- `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_v4_sequence_embeddings.ipynb`
+  - sequence embedding representation learning (GRU autoencoder)
+  - merge embeddings with tabular features
+  - train LightGBM on hybrid features
 
 ## Data Path (Colab)
-Notebook default data root:
+Default root:
 `/content/drive/MyDrive/amex_data_parquet`
 
 Required files:
 - `train_data.parquet`
-- `test_data.parquet`
+- `test_data.parquet` (needed for submission pipelines)
 - `train_labels.csv`
-- `sample_submission.csv`
+- `sample_submission.csv` (needed for submission pipelines)
+
+## Notes
+- Use `v2`/`v3` for leaderboard submission flow.
+- Use `v4` to experiment with sequence representation learning while keeping Colab memory stable via subsampling.
