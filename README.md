@@ -2,17 +2,13 @@
 
 Interview-focused Kaggle project for **American Express - Default Prediction**.
 
-## Notebooks
+## Primary Notebook
 - `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_default_prediction.ipynb`
   - `v1`: baseline incremental LightGBM
   - `v2`: advanced production ensemble
   - `v3`: two-stage advanced model (statement meta -> customer model)
-  - `v2+v3+v4` rank blend cell saves `blend_v234_submission.csv`
-- `/Users/claire/PycharmProjects/amex-default-prediction/notebooks/amex_v4_sequence_embeddings.ipynb`
-  - upgraded sequence representation learning (bi-GRU denoising autoencoder)
-  - delta-sequence features + early stopping + larger embeddings
-  - merge embeddings with tabular aggregates and train LightGBM
-  - test inference saves `v4_submission.csv`
+  - `v4`: sequence embedding model (bi-GRU denoising autoencoder + LightGBM)
+  - `blend`: rank blend of `v2 + v3 + v4`
 
 ## Data Path (Colab)
 Default root:
@@ -20,14 +16,16 @@ Default root:
 
 Required files:
 - `train_data.parquet` or `train_data.csv`
-- `test_data.parquet` / `test_data.csv` (needed for submission pipelines)
+- `test_data.parquet` or `test_data.csv`
 - `train_labels.csv`
-- `sample_submission.csv` (needed for submission pipelines)
+- `sample_submission.csv`
+
+## Outputs
+- `advanced_submission_v2.csv`
+- `advanced_submission_v3.csv`
+- `v4_submission.csv`
+- `blend_v234_submission.csv`
 
 ## Notes
-- Use `v2`/`v3` for leaderboard submission flow.
-- Use `v4` for deeper sequence modeling.
-- If runtime is tight in Colab, reduce in `v4` config:
-  - `train_customer_sample`
-  - `embed_dim`, `hidden_dim`
-  - `epochs`
+- Choose one run target with `TRAIN_VERSION` in setup cell: `v1` / `v2` / `v3` / `v4`.
+- Run blend section after `v2`, `v3`, and `v4` submissions are generated.
